@@ -22,10 +22,12 @@ Contract Invariant(
     // Key: TokenId, Value: ReserveId
     mapping[ByteVec, ByteVec] reserves
 
+    // T1CHECK - Contract upgrade
     pub fn upgrade(bytecode: ByteVec) -> () {
         checkCaller!(callerAddress!() == config.admin, InvariantError.NotAdmin)
         migrate!(bytecode)
     }
+    // T1CHECK_END
     
     pub fn getProtocolFee() -> Percentage {
         return config.protocolFee
