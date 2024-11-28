@@ -76,14 +76,17 @@ Contract Invariant(
         pools[key] = pool
     }
 
+    // T2CHECK - Pool creation
     @using(preapprovedAssets = true, checkExternalCaller = false)
     pub fn createPool(token0: ByteVec, token1: ByteVec, feeTier: FeeTier, initSqrtPrice: SqrtPrice, initTick: I256) -> () {
         assert!(feeTierExist(feeTier), InvariantError.FeeTierNotFound)
 
+        // SKIP
         clamm.checkTick(initTick, feeTier.tickSpacing)
 
         assert!(token0 != token1, InvariantError.TokensAreSame)
 
+        // SKIP
         assert!(clamm.checkTickToSqrtPriceRelationship(initTick, feeTier.tickSpacing, initSqrtPrice), InvariantError.TickAndSqrtPriceMismatch)
 
         let caller = callerAddress!()
@@ -93,6 +96,7 @@ Contract Invariant(
         addPoolKey{caller -> ALPH: mapEntryDeposit}(caller, poolKey)
         addPool{caller -> ALPH: mapEntryDeposit * 4}(caller, poolKey, initSqrtPrice, initTick, timestamp, config.admin)
     }
+    // T2CHECK_END
 
     @using(preapprovedAssets = true, updateFields = true)
     pub fn addFeeTier(feeTier: FeeTier) -> () {
@@ -185,6 +189,7 @@ Contract Invariant(
         )
     }
 
+    // T2CHECK - Position creation
     @using(preapprovedAssets = true, checkExternalCaller = false)
     pub fn createPosition(
         poolKey: PoolKey,
@@ -251,6 +256,9 @@ Contract Invariant(
             Reserve(pool.reserveY).depositSingleAsset{caller -> pool.poolKey.tokenY: y.v}(caller, pool.poolKey.tokenY, y)    
         }
     }
+    // T2CHECK_END
+
+    // T2CHECK - Position removal
     @using(checkExternalCaller = false)
     pub fn removePosition(index: U256) -> () {
         let caller = callerAddress!()
@@ -264,6 +272,7 @@ Contract Invariant(
 
         let (_, pool) = wrappedGetPool(poolKey)
 
+        // SKIP
         let (mut x, mut y, mPosition, isLowerEmpty, isUpperEmpty) = modify(position, pool, lowerTick, upperTick, position.liquidity, false, blockTimeStamp!())
         
         x.v = x.v + mPosition.tokensOwedX.v
@@ -287,6 +296,7 @@ Contract Invariant(
 
         wrappedRemovePosition(caller, index)
     }
+    // T2CHECK_END
 
     @using(preapprovedAssets = true, checkExternalCaller = false)
     pub fn transferPosition(index: U256, newOwner: Address) -> () {
@@ -403,6 +413,7 @@ Contract Invariant(
         }
     }
 
+    // T2CHECK - Swap
     @using(preapprovedAssets = true, checkExternalCaller = false)
     pub fn swap(
         poolKey: PoolKey,
@@ -412,6 +423,7 @@ Contract Invariant(
         sqrtPriceLimit: SqrtPrice
     ) -> CalculateSwapResult {
         let caller = callerAddress!()
+        // SKIP - assume correct values
         let calculateSwapResult = calculateSwap(poolKey, xToY, amount, byAmountIn, sqrtPriceLimit)
 
         let (_, pool) = wrappedGetPool(poolKey)
@@ -436,7 +448,9 @@ Contract Invariant(
 
         return calculateSwapResult
     }
+    // T2CHECK_END
     
+    // T2CHECK - Fee collection
     // caller is checked in `wrappedGetPosition`
     @using(checkExternalCaller = false)
     pub fn claimFee(index: U256) -> () {
@@ -450,6 +464,7 @@ Contract Invariant(
         let (_, upperTick) = wrappedGetTick(poolKey, position.upperTickIndex)
         let (_, lowerTick) = wrappedGetTick(poolKey, position.lowerTickIndex)
 
+        // SKIP
         let (_, _, mut mPosition, _, _) = modify(position, pool, lowerTick, upperTick, Liquidity{v: 0}, false, blockTimeStamp!())
         
         let tokensOwedX = mPosition.tokensOwedX
@@ -467,6 +482,7 @@ Contract Invariant(
             Reserve(pool.reserveY).withdrawSingleAsset(caller, pool.poolKey.tokenY, tokensOwedY)    
         }
     }
+    // T2CHECK_END
 
     fn getSingleBatch(poolKey: PoolKey, index: U256) -> ByteVec {
         let mut batch = #
