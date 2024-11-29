@@ -1,7 +1,8 @@
 // structs taken as entrypoint input
-
+// SKIP
 struct InvariantConfig { admin: Address, mut protocolFee: Percentage }
 
 struct FeeTiers {
     mut feeTiers: [FeeTier; 32]
 }
+// SKIP_END

@@ -1,3 +1,4 @@
+// SKIP
 Abstract Contract Log() extends Decimal() {
     const LOG2_SCALE = 64
     const LOG2_DOUBLE_SCALE = LOG2_SCALE *2
@@ -136,3 +137,4 @@ Abstract Contract Log() extends Decimal() {
         }
     }
 }
+// SKIP_END

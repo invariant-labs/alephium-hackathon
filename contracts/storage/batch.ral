@@ -16,7 +16,9 @@ Abstract Contract BatchHelper() {
         bitmap[key] = batch
     }
 
+    // SKIP
     fn getKey(chunk: U256) -> U256 {
         return chunk / CHUNKS_PER_BATCH
     }
+    // SKIP_END
 }

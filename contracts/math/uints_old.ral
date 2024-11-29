@@ -1,3 +1,4 @@
+// SKIP
 Contract UintsOld () {
     const WORD_SIZE = 256
     
@@ -297,4 +298,4 @@ Contract UintsOld () {
         return a.higher == 0 && a.lower == 0
     }
 }
-
+// SKIP_END

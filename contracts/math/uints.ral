@@ -1,3 +1,4 @@
+// SKIP
 struct U512 {
     mut higher: U256,
     mut lower: U256
@@ -222,4 +223,4 @@ Abstract Contract Uints () {
         return a.higher == 0 && a.lower == 0
     }
 }
-
+// SKIP_END

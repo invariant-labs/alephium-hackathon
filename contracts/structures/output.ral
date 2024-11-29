@@ -1,3 +1,4 @@
+// SKIP
 // structs used for entrypoint output, sometimes replaced with ByteVec and used only in Ts
 
 struct CalculateSwapResult {
@@ -30,3 +31,4 @@ struct LiquidityTick {
     mut liquidityChange: Liquidity,
     mut sign: Bool
 }
+// SKIP_END

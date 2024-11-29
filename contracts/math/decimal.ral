@@ -1,3 +1,4 @@
+// SKIP
 Abstract Contract Decimal() {
     fn getMaxTick(tickSpacing: U256) -> I256 {
         let convertedTickSpacing = toI256!(tickSpacing)
@@ -176,3 +177,4 @@ Abstract Contract Decimal() {
         return feeGrowthInsideX, feeGrowthInsideY
     }
 }
+// SKIP_END

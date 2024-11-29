@@ -1,3 +1,4 @@
+// T1CHECK - Reserve subcontract
 Contract Reserve(invariant: Address, mut assetsStored: U256) {
     @using(updateFields = true)
     pub fn incrementAssets(by: U256) -> () {
@@ -7,9 +8,11 @@ Contract Reserve(invariant: Address, mut assetsStored: U256) {
         assetsStored = assetsStored + by
     }
 
+    // SKIP - query
     pub fn getAssetsCount() -> U256 {
         return assetsStored
     }
+    // SKIP_END
 
     @using(preapprovedAssets = true, payToContractOnly = true)
     pub fn depositSingleAsset(from: Address, id: ByteVec, amount: TokenAmount) -> () {
@@ -49,3 +52,4 @@ Contract Reserve(invariant: Address, mut assetsStored: U256) {
         transferTokenFromSelf!(swapper, outId, out.v)
     }
 }
+// T1CHECK_END

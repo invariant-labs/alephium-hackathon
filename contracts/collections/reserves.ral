@@ -1,3 +1,4 @@
+// T1CHECK - Reserve handling
 Abstract Contract Reserves() {
     @using(updateFields = true, preapprovedAssets = true)
     fn handleReserves(caller: Address, tokenX: ByteVec, tokenY: ByteVec) -> (ByteVec, ByteVec) {
@@ -74,7 +75,6 @@ Abstract Contract Reserves() {
         return xId, yId
     }
 
-
     @using(updateFields = true, preapprovedAssets = true)
     fn initReserve(caller: Address, reservePath: ByteVec, assetsToStore: U256) -> ByteVec {
         let (encodedImmFields, encodedMutFields) = Reserve.encodeFields!(selfAddress!(), assetsToStore)
@@ -88,3 +88,4 @@ Abstract Contract Reserves() {
         return id
     }
 }
+// T1CHECK_END

@@ -1,3 +1,4 @@
+// SKIP
 TxScript Withdraw(token: TokenFaucet, amount: U256) {
     token.withdraw(amount)
 }
@@ -7,3 +8,4 @@ TxScript Airdrop(tokenOne: TokenFaucet, amountOne: U256, tokenTwo: TokenFaucet, 
     tokenTwo.withdraw(amountTwo)
     tokenThree.withdraw(amountThree)
 }
+// SKIP_END

@@ -1,3 +1,4 @@
+// SKIP
 struct SqrtPrice{
     mut v: U256
 }
@@ -38,4 +39,4 @@ struct FixedPoint{
 }
 const FIXED_POINT_SCALE = 24
 const FIXED_POINT_DENOMINATOR = 10**FIXED_POINT_SCALE
-
+// SKIP_END
