@@ -1,3 +1,4 @@
+// SKIP
 import "std/fungible_token_interface"
 
 Contract TokenFaucet(
@@ -36,3 +37,4 @@ Contract TokenFaucet(
         balance = balance - amount
     }
 }
+// SKIP_END

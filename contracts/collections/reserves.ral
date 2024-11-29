@@ -75,7 +75,6 @@ Abstract Contract Reserves() {
         return xId, yId
     }
 
-    // SKIP FUNCTION
     @using(updateFields = true, preapprovedAssets = true)
     fn initReserve(caller: Address, reservePath: ByteVec, assetsToStore: U256) -> ByteVec {
         let (encodedImmFields, encodedMutFields) = Reserve.encodeFields!(selfAddress!(), assetsToStore)

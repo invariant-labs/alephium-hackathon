@@ -1,3 +1,4 @@
+// SKIP
 TxScript AddFeeTier(invariant: Invariant, feeTier: FeeTier) {
     invariant.addFeeTier{callerAddress!() -> ALPH: mapEntryDeposit!()}(feeTier)
 }
@@ -21,7 +22,9 @@ TxScript ChangeFeeReceiver(invariant: Invariant, poolKey: PoolKey, newFeeReceive
 TxScript WithdrawProtocolFee(invariant: Invariant, poolKey: PoolKey) {
     invariant.withdrawProtocolFee(poolKey)
 }
+// SKIP_END
 
+// T2CHECK
 TxScript CreatePosition(
     invariant: Invariant,
     poolKey: PoolKey,
@@ -41,7 +44,9 @@ TxScript CreatePosition(
             (poolKey, lowerTick, upperTick, liquidityDelta, slippageLimitLower, slippageLimitUpper)
     }
 }
+// T2CHECK_END
 
+// SKIP
 TxScript RemovePosition(invariant: Invariant, index: U256) {
     invariant.removePosition(index)
 }
@@ -53,7 +58,9 @@ TxScript TransferPosition(invariant: Invariant, index: U256, recipient: Address)
 TxScript ClaimFee(invariant: Invariant, index: U256) {
     invariant.claimFee(index)
 }
+// SKIP_END
 
+// T2CHECK
 TxScript Swap(invariant: Invariant, poolKey: PoolKey, xToY: Bool, amount: TokenAmount, byAmountIn: Bool, sqrtPriceLimit: SqrtPrice) {
     let mut swappedToken = poolKey.tokenX
     let mut swappedAmount = amount.v
@@ -66,7 +73,9 @@ TxScript Swap(invariant: Invariant, poolKey: PoolKey, xToY: Bool, amount: TokenA
 
     let _ = invariant.swap{callerAddress!() -> swappedToken: swappedAmount}(poolKey, xToY, amount, byAmountIn, sqrtPriceLimit)
 }
+// T2CHECK_END
 
+// T2CHECK
 TxScript CreatePoolAndPosition(
     invariant: Invariant,
     poolKey: PoolKey,
@@ -90,3 +99,4 @@ TxScript CreatePoolAndPosition(
             (poolKey, lowerTick, upperTick, liquidityDelta, slippageLimitLower, slippageLimitUpper)
     }
 }
+// T2CHECK_END

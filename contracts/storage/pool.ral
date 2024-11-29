@@ -15,6 +15,7 @@ struct Pool {
 }
 
 Abstract Contract PoolHelper(clamm: CLAMM) extends Decimal() {
+    // SKIP
     fn addFee(mut pool: Pool, amount: TokenAmount, inX: Bool, protocolFee: Percentage) -> Pool {
         let invariantProtocolFee = TokenAmount{v: mulUp(amount.v, protocolFee.v, PERCENTAGE_DENOMINATOR)}
 
@@ -36,6 +37,7 @@ Abstract Contract PoolHelper(clamm: CLAMM) extends Decimal() {
 
         return pool
     }
+    // SKIP_END
     
     fn updatePoolLiquidity(mut pool: Pool, liquidityDelta: Liquidity, liquiditySign: Bool, upperTick: I256, lowerTick: I256) -> (TokenAmount, TokenAmount, Pool) {
         let (x, y, updateLiq) = clamm.calculateAmountDelta(pool.currentTickIndex, pool.sqrtPrice, liquidityDelta, liquiditySign, upperTick, lowerTick)
@@ -109,6 +111,7 @@ Abstract Contract PoolHelper(clamm: CLAMM) extends Decimal() {
         pools[key] = pool
     }
     
+    // SKIP
     fn serializePool(pool: Pool) -> ByteVec {
         return pool.poolKey.tokenX ++ b`break`
         ++ pool.poolKey.tokenY ++ b`break`
@@ -127,4 +130,5 @@ Abstract Contract PoolHelper(clamm: CLAMM) extends Decimal() {
         ++ pool.reserveX ++ b`break` 
         ++ pool.reserveY ++ b`break`
     }
+    // SKIP_END
 }

@@ -1,8 +1,9 @@
 // structs for intermediary calculations inside of the contract
-
+// SKIP
 struct SwapResult {
     nextSqrtPrice: SqrtPrice,
     amountIn: TokenAmount,
     amountOut: TokenAmount,
     feeAmount: TokenAmount
 }
+// SKIP_END

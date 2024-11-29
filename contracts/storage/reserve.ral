@@ -8,10 +8,11 @@ Contract Reserve(invariant: Address, mut assetsStored: U256) {
         assetsStored = assetsStored + by
     }
 
-    // SKIP FUNCTION
+    // SKIP - query
     pub fn getAssetsCount() -> U256 {
         return assetsStored
     }
+    // SKIP_END
 
     @using(preapprovedAssets = true, payToContractOnly = true)
     pub fn depositSingleAsset(from: Address, id: ByteVec, amount: TokenAmount) -> () {
@@ -20,7 +21,6 @@ Contract Reserve(invariant: Address, mut assetsStored: U256) {
         transferTokenToSelf!(from, id, amount.v)
     }
 
-    // SAME THING AS FUNCTION ABOVE
     @using(preapprovedAssets = true, assetsInContract = true)
     pub fn depositTwoAssets(from: Address, xId: ByteVec, yId: ByteVec, x: TokenAmount, y: TokenAmount) -> () {
         let caller = callerAddress!()
@@ -36,7 +36,6 @@ Contract Reserve(invariant: Address, mut assetsStored: U256) {
         transferTokenFromSelf!(to, id, amount.v)
     }
 
-    // SAME THING AS FUNCTION ABOVE
     @using(assetsInContract = true)
     pub fn withdrawTwoAssets(to: Address, xId: ByteVec, yId: ByteVec, x: TokenAmount, y: TokenAmount) -> () {
         let caller = callerAddress!()

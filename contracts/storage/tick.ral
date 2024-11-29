@@ -43,7 +43,7 @@ Abstract Contract TickHelper() extends Decimal() {
         
         return tick
     }
-
+    // SKIP
     fn calculateNewLiquidityGross(tick: Tick, sign: Bool, liquidityDelta: Liquidity, maxLiquidityPerTick: Liquidity) -> Liquidity {
         let mut newLiquidity = Liquidity{v: 0}
         if (sign) {
@@ -56,4 +56,5 @@ Abstract Contract TickHelper() extends Decimal() {
         assert!(newLiquidity.v <= maxLiquidityPerTick.v, InvariantError.InvalidTickLiquidity)
         return newLiquidity
     }
+    // SKIP_END
 }

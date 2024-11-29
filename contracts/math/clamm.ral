@@ -1,8 +1,12 @@
 Contract CLAMM(admin: Address) extends Uints(), Log(){
+    // T1CHECK - Contract upgrade
     pub fn upgrade(bytecode: ByteVec) -> () {
         checkCaller!(callerAddress!() == admin, InvariantError.NotAdmin)
         migrate!(bytecode)
     }
+    // T1CHECK_END
+
+    // SKIP
     pub fn computeSwapStep(
         currentSqrtPrice: SqrtPrice,
         targetSqrtPrice: SqrtPrice,
@@ -294,6 +298,7 @@ Contract CLAMM(admin: Address) extends Uints(), Log(){
         return maxLiquidity
     }
 
+    
     pub fn checkTicks(tickLower: I256, tickUpper: I256, tickSpacing: U256) -> () {
         assert!(tickLower < tickUpper, CLAMMError.InvalidTickIndex)
         checkTick(tickLower, tickSpacing)
@@ -335,5 +340,5 @@ Contract CLAMM(admin: Address) extends Uints(), Log(){
     pub fn feeGrowthFromFee(liquidity: Liquidity, fee: TokenAmount) -> FeeGrowth {
         return FeeGrowth{v: toU256(bigMulDiv256(fee.v, one(LIQUIDITY_SCALE + FEE_GROWTH_SCALE), liquidity.v))}
     }
-
+    // SKIP_END
 }

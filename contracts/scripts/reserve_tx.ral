@@ -1,3 +1,4 @@
+// SKIP
 TxScript IncrementAssets(reserve: Reserve, by: U256) {
     reserve.incrementAssets(by)
 }
@@ -21,3 +22,4 @@ TxScript WithdrawTwoAssets(reserve: Reserve, xId: ByteVec, yId: ByteVec, x: Toke
 TxScript SwapAssets(reserve: Reserve, inId: ByteVec, outId: ByteVec, in: TokenAmount, out: TokenAmount) {
     reserve.swap{callerAddress!() -> inId: in.v}(callerAddress!(), inId, outId, in, out)
 }
+// SKIP_END

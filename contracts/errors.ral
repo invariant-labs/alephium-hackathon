@@ -1,5 +1,5 @@
 // Error codes should be unique across all contracts for clarity
-
+// SKIP
 enum InvariantError {
     NotAdmin = 0
     InsufficientLiquidity = 1
@@ -69,3 +69,4 @@ enum ArithmeticError {
 enum FaucetError {
     InvalidWithdrawAmount = 200000
 }
+// SKIP_END
